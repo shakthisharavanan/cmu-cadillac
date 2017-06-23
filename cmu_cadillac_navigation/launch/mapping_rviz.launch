@@ -1,0 +1,24 @@
+<launch>
+
+  <arg name="model" default="$(find cmu_cadillac_description)/urdf/cmu_cadillac.urdf"/>
+  <arg name="gui" default="true" />
+  <arg name="rvizconfig" default="$(find cmu_cadillac_navigation)/config/cmu_cadillac_mapping.rviz" />
+
+  <param name="robot_description" command="$(find xacro)/xacro.py $(arg model)" />
+  <param name="use_gui" value="$(arg gui)"/>
+
+  <!--launch urdf in rviz-->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
+
+  <!--TF frame from odom to base_link-->
+  <!--<node name="odom_to_base" pkg="cmu_cadillac_gazebo" type="odom_to_base.py" output="screen" /> -->
+
+  <!--Gmapping slam-->
+    <param name="use_sim_time" value="true"/>
+    <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
+      <remap from="scan" to="laser_scan"/>
+      <param name="base_frame" value="base_footprint"/>
+      <param name="odom_frame" value="world"/>
+    </node>
+
+</launch>

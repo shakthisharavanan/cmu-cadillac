@@ -1,0 +1,837 @@
+<?xml version="1.0" ?>
+<robot name="truck">
+
+  <material name="Red">
+    <color rgba="1.0 0 0 1.0"/>
+  </material>
+  <material name="Green">
+    <color rgba="0 1.0 0 1.0"/>
+  </material>
+  <material name="Blue">
+    <color rgba="0 0 1.0 0.5"/>
+  </material>
+  <material name="Black">
+    <color rgba="0 0 0 1.0"/>
+  </material>
+  <material name="Aqua">
+    <color rgba="0 255 255 1.0"/>
+  </material>
+
+
+<!-- base_link -->
+   <link name="base_link" >
+    <inertial>
+      <mass value="1500"/>
+      <origin xyz="0 0 1.1" rpy="0 0 0"/>
+        <inertia ixx="795.236" ixy="0.0" ixz="0.0" iyy="3114.64" iyz="0.0" izz="3481.49"/>
+    </inertial>
+    <!--
+    <visual>
+      <origin xyz="0 0 1.1" rpy="0 0 0"/>
+      <geometry>
+        <box size="4.967 1.9 0.567"/>
+      </geometry>
+      <material name="Red"/>
+    </visual>
+  -->
+    <visual>
+      <origin xyz="0 0 0.65" rpy="-1.5707 0 -3.1414" />
+      <geometry>
+        <mesh filename="package://cmu_cadillac_description/urdf/srx/srx_body.dae" scale="0.5 0.5 0.5"/>             
+      </geometry>
+    </visual>  
+    <collision>
+  <origin xyz="0 0 1.1" rpy="0 0 0"/>
+      <geometry>
+        <box size="4.967 1.9 0.567"/>
+      </geometry>
+    </collision>
+   </link>
+<!-- Front link of Ackermann -->
+  <link name="front_link">
+    <inertial>
+      <mass value="300"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="250" ixy="0.0" ixz="0.0" iyy="800" iyz="0.0" izz="800"/>
+    </inertial>
+    <visual>
+  <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.015 1.627 0.005"/>
+      </geometry>
+      <material name="Aqua"/>
+    </visual>
+    <collision>
+  <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.015 1 0.005"/>
+      </geometry>
+    </collision>
+  </link>
+
+<!-- Rear link of Ackermann -->
+  <link name="rear_link">
+    <inertial>
+      <mass value="300"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1" ixy="0.0" ixz="0.0" iyy="1" iyz="0.0" izz="1"/>
+    </inertial>
+    <visual>
+  <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.015 1.623 0.005"/>
+      </geometry>
+      <material name="Aqua"/>
+    </visual>
+    <collision>
+  <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.015 1.2 0.005"/>
+      </geometry>
+    </collision>
+  </link>
+<!--front wheel left-->
+  <link name="front_left">
+    <inertial>
+      <mass value="12"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+        <inertia ixx="0.160731" ixy="0.0" ixz="0.0" iyy="0.22815" iyz="0.0" izz="0.160731"/>
+    </inertial>
+    <!--
+    <visual>
+      <origin rpy="1.57079632679 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length="0.25" radius="0.38"/>
+      </geometry>
+      <material name="Black"/>
+    </visual>
+    -->
+    <visual>
+      <origin xyz="0 0 0" rpy="3.14158 0 0" />
+      <geometry>
+        <mesh filename="package://cmu_cadillac_description/urdf/meshes/wheel.dae" scale="1.15 1.15 1.15"/>             
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="1.57079632679 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length="0.25" radius="0.38"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <gazebo reference="front_left">
+  <maxContacts>1</maxContacts>
+  <mu1>1.0</mu1>
+  <mu2>1.0</mu2>
+  <fdir1>0 0 1</fdir1>
+  <minDepth>0.005</minDepth>
+  <kp>1e8</kp>
+  <!--ode>
+  <slip1>0.0</slip1>
+  <slip2>0.0</slip2>
+  </ode-->
+  </gazebo>
+
+<!--front left steering block -->
+  <link name="front_left_block">
+    <inertial>
+      <mass value="10"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+        <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.1 0.1 0.005"/>
+      </geometry>
+      <material name="Black"/>
+    </visual>
+  <!--
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.2 0.2 0.005"/>
+      </geometry>
+    </collision>
+  -->
+  </link>
+
+
+ <!-- the front right wheel -->
+  <link name="front_right">
+    <inertial>
+      <mass value="12"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="0.160731" ixy="0.0" ixz="0.0" iyy="0.22815" iyz="0.0" izz="0.160731"/>
+    </inertial>
+    <!--
+    <visual>
+      <origin rpy="1.57079632679 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length="0.25" radius="0.38"/>
+      </geometry>
+      <material name="Black"/>
+    </visual>
+    -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://cmu_cadillac_description/urdf/meshes/wheel.dae" scale="1.15 1.15 1.15"/>             
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="-1.57079632679 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length="0.25" radius="0.38"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <gazebo reference="front_right">
+  <maxContacts>1</maxContacts>
+  <mu1>1.0</mu1>
+  <mu2>1.0</mu2>
+  <fdir1>0 0 1</fdir1>
+  <minDepth>0.005</minDepth>
+  <kp>1e8</kp>
+  <!--ode>
+  <slip1>0.0</slip1>
+  <slip2>0.0</slip2>
+  </ode-->
+  </gazebo>  
+
+<!--front right steering block -->
+  <link name="front_right_block">
+    <inertial>
+      <mass value="10"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+        <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.1 0.1 0.005"/>
+      </geometry>
+      <material name="Black"/>
+    </visual>
+  <!--
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.2 0.2 0.005"/>
+      </geometry>
+    </collision>
+  -->
+  </link>
+
+  <!-- the back left wheel -->
+  <link name="rear_left">
+    <inertial>
+      <mass value="12"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="0.160731" ixy="0.0" ixz="0.0" iyy="0.22815" iyz="0.0" izz="0.160731"/>    
+    </inertial>
+    <!--
+    <visual>
+      <origin rpy="1.57079632679 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length="0.25" radius="0.38"/>
+      </geometry>
+      <material name="Black"/>
+    </visual>
+      -->
+    <visual>
+      <origin xyz="0 0 0" rpy="3.14158 0 0" />
+      <geometry>
+        <mesh filename="package://cmu_cadillac_description/urdf/meshes/wheel.dae" scale="1.15 1.15 1.15"/>             
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="1.57079632679 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length="0.25" radius="0.38"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <gazebo reference="rear_left">
+  <maxContacts>1</maxContacts>
+  <mu1>1.0</mu1>
+  <mu2>1.0</mu2>
+  <fdir1>0 0 1</fdir1>
+  <minDepth>0.005</minDepth>
+  <kp>1e8</kp>
+  <!--ode>
+  <slip1>0.0</slip1>
+  <slip2>0.0</slip2>
+  </ode-->
+  </gazebo>
+
+  <!-- the back right wheel -->
+  <link name="rear_right">
+    <inertial>
+      <mass value="12"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="0.160731" ixy="0.0" ixz="0.0" iyy="0.22815" iyz="0.0" izz="0.160731"/>
+    </inertial>
+    <!--
+    <visual>
+      <origin rpy="1.57079632679 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length="0.25" radius="0.38"/>
+      </geometry>
+      <material name="Black"/>
+    </visual>
+  -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://cmu_cadillac_description/urdf/meshes/wheel.dae" scale="1.15 1.15 1.15"/>             
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="1.57079632679 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length="0.25" radius="0.38"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <gazebo reference="rear_right">
+  <maxContacts>1</maxContacts>
+  <mu1>1.0</mu1>
+  <mu2>1.0</mu2>
+  <fdir1>0 0 1</fdir1>
+  <minDepth>0.005</minDepth>
+  <kp>1e8</kp>
+  <!--ode>
+  <slip1>0.0</slip1>
+  <slip2>0.0</slip2>
+  </ode-->
+  </gazebo>
+
+  <!--2nd carriage attachment block -->
+  <link name="attachment_block">
+    <inertial>
+      <mass value="1000"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+        <inertia ixx="500" ixy="0.0" ixz="0.0" iyy="1600" iyz="0.0" izz="1600"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="1.5 0.2 0.005"/>
+      </geometry>
+      <material name="Black"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="1.5 0.2 0.005"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!--2nd carriage chassis -->
+  <link name="2nd_chassis">
+    <inertial>
+      <mass value="1500"/>
+      <origin xyz="-2.5 0 0" rpy="0 0 0"/>
+        <inertia ixx="795.236" ixy="0.0" ixz="0.0" iyy="3114.64" iyz="0.0" izz="3481.49"/>
+    </inertial>
+    <!--
+    <visual>
+      <origin xyz="0 0 1.1" rpy="0 0 0"/>
+      <geometry>
+        <box size="4.967 1.9 0.567"/>
+      </geometry>
+      <material name="Red"/>
+    </visual>
+  -->
+    <visual>
+    <origin xyz="-2.5 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="4.967 1.9 0.567"/>
+      </geometry>          
+    </visual>  
+    <collision>
+    <origin xyz="-2.5 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="4.967 1.9 0.567"/>
+      </geometry>
+    </collision>
+  </link>
+
+    <!-- the 2nd back right wheel -->
+  <link name="2nd_rear_right">
+    <inertial>
+      <mass value="12"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="0.160731" ixy="0.0" ixz="0.0" iyy="0.22815" iyz="0.0" izz="0.160731"/>
+    </inertial>
+    <!--
+    <visual>
+      <origin rpy="1.57079632679 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length="0.25" radius="0.38"/>
+      </geometry>
+      <material name="Black"/>
+    </visual>
+  -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://cmu_cadillac_description/urdf/meshes/wheel.dae" scale="1.15 1.15 1.15"/>             
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="1.57079632679 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length="0.25" radius="0.38"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <gazebo reference="2nd_rear_right">
+  <maxContacts>1</maxContacts>
+  <mu1>1.0</mu1>
+  <mu2>1.0</mu2>
+  <fdir1>0 0 1</fdir1>
+  <minDepth>0.005</minDepth>
+  <kp>1e8</kp>
+  <!--ode>
+  <slip1>0.0</slip1>
+  <slip2>0.0</slip2>
+  </ode-->
+  </gazebo>
+
+
+  <link name="2nd_rear_left">
+    <inertial>
+      <mass value="12"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="0.160731" ixy="0.0" ixz="0.0" iyy="0.22815" iyz="0.0" izz="0.160731"/>
+    </inertial>
+    <!--
+    <visual>
+      <origin rpy="1.57079632679 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length="0.25" radius="0.38"/>
+      </geometry>
+      <material name="Black"/>
+    </visual>
+  -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://cmu_cadillac_description/urdf/meshes/wheel.dae" scale="1.15 1.15 1.15"/>             
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="1.57079632679 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length="0.25" radius="0.38"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <gazebo reference="2nd_rear_left">
+  <maxContacts>1</maxContacts>
+  <mu1>1.0</mu1>
+  <mu2>1.0</mu2>
+  <fdir1>0 0 1</fdir1>
+  <minDepth>0.005</minDepth>
+  <kp>1e8</kp>
+  <!--ode>
+  <slip1>0.0</slip1>
+  <slip2>0.0</slip2>
+  </ode-->
+  </gazebo>
+
+
+<!--gas pedal-->
+<link name="gas_pedal">                    
+<gravity>false</gravity>
+      <inertial>
+        <mass value="0.1"/>
+        <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+      </inertial>
+      <!--
+      <collision>
+    <origin rpy="3.14159  1.12559  3.14159" xyz="0  0  0"/>
+        <geometry>
+          <box size="0.1069000 0.0770000 0.010000"/>
+        </geometry>
+      </collision>
+      <visual>
+        <origin rpy="0 0 -1.5707"/>
+        <geometry>
+          <box size="0.1069000 0.0770000 0.010000"/>             
+        </geometry>
+      </visual>
+    -->
+</link>   
+ <joint name="gas_joint" type="prismatic">
+    <origin xyz="0.63 0.10 2.0"/>
+      <parent link="base_link"/>
+      <child link="gas_pedal"/>
+      <!--axis xyz="1.000000 0.000000 -1.000000"/-->
+        <axis xyz="0.7071  0     -0.7071"/>
+      <limit effort="1000" velocity="1000" lower="0" upper="0.08"/>
+      <dynamics damping="3"/>
+  </joint>      
+ <gazebo reference="gas_joint">        
+      <implicitSpringDamper>1</implicitSpringDamper>
+</gazebo>
+
+<!--Brake Pedal-->
+ <link name="brake_pedal">
+  <gravity>false</gravity>
+   <inertial>
+     <mass value="0.1"/>
+     <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+   </inertial>
+   <!--
+   <collision>
+   <origin rpy="3.14159  1.14259  3.14159" xyz="-0.04   0    -0.086"/>
+     <geometry>
+       <box size="0.063 0.08 0.01"/>
+    </geometry>
+   </collision>
+   <visual>
+    <origin rpy="0 0 -1.5707"/>
+     <geometry>
+        <box size="0.063 0.08 0.01"/>  
+     </geometry>
+  </visual>
+-->
+ </link>                                      
+ <joint name="brake_joint" type="prismatic">
+    <parent link="base_link"/>
+    <child link="brake_pedal"/>
+    <origin rpy="0  0  0" xyz="0.64  0.27  2"/>
+    <axis xyz="0.85749  0      -0.51449"/>
+    <limit effort="1000" lower="0.0" upper="0.08" velocity="1000"/>
+    <dynamics damping="3.0"/>
+</joint>
+ <gazebo reference="brake_joint">        
+        <implicitSpringDamper>1</implicitSpringDamper>
+</gazebo>
+ 
+ <!--Steering Wheel-->    
+ <link name="steering_wheel"> 
+   <gravity>false</gravity>
+    <inertial>
+      <mass value="1.0"/>
+      <inertia ixx="0.012" ixy="0" ixz="0" iyy="0.012" iyz="0" izz="0.024"/>
+    </inertial>
+    <!--    
+    <collision>
+      <origin xyz="0.002  0     0" rpy="-0.69 0 -1.570796"/>
+      <geometry>
+         <mesh filename="package://cmu_cadillac_description/urdf/meshes/SteeringWheel.dae" scale="1.0 1.0 1.0"/>  
+      </geometry>
+    </collision>
+    <visual name="visual">
+      <origin xyz="0.002  0     0" rpy="-0.69 0 -1.570796"/>
+      <geometry>
+    <mesh filename="package://cmu_cadillac_description/urdf/meshes/SteeringWheel.dae" scale="1.0 1.0 1.0"/>  
+      </geometry>
+    </visual>
+  -->
+ </link>
+ <joint name="steering_joint" type="revolute">
+    <parent link="base_link"/>
+    <child link="steering_wheel"/>
+    <origin rpy="0   -0.87  0" xyz="0.33871  0.3      1.99847"/>
+    <axis xyz="0  0  1"/>
+    <limit effort="1000" lower="-3.14" upper="3.14" velocity="1000"/>
+    <dynamics damping="1.0"/>
+ </joint>
+ <gazebo reference="steering joint">
+  <implicitSpringDamper>1</implicitSpringDamper>
+</gazebo>
+ <gazebo reference="steering_wheel">
+  <minDepth>0.003</minDepth>
+ </gazebo>   
+
+ <!-- Hokuyo Laser -->
+  <link name="hokuyo_link">
+    <!--
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+    <box size="0.1 0.1 0.1"/>
+      </geometry>
+    </collision>
+    -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 1.5707 0"/>
+      <geometry>
+        <mesh filename="package://cmu_cadillac_description/meshes/hokuyo.dae"/>
+      </geometry>
+    </visual>
+
+    <inertial>
+      <mass value="1e-5" />
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+    </inertial>
+  </link>
+
+  <joint name="hokuyo_joint" type="fixed">
+    <axis xyz="1 0 0" />
+    <origin xyz="2.3 0 0.70" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="hokuyo_link"/>
+  </joint>
+
+  <!-- Front link of Ackermann -->
+  <!-- Joins to the Car body -->
+  <joint name="front_joint" type="fixed">
+   <!-- <limit effort="100" lower="-0.5" upper="0.5" velocity="10"/>  
+    <axis xyz="0 0 1"/>  -->
+    <parent link="base_link"/>
+    <child link="front_link"/>
+    <origin xyz="1.4035 0.0 0.38"/>
+  </joint>
+
+  <joint name="rear_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="rear_link"/>
+    <origin xyz="-1.4035 0.0 0.38"/>
+  </joint>
+
+  <joint name="front_left_steering_joint" type="revolute">
+    <limit effort="100" lower="-0.7" upper="0.7" velocity="10"/>  
+    <axis xyz="0 0 1"/>  
+    <parent link="front_link"/>
+    <child link="front_left_block"/>
+    <origin rpy="0 0 0" xyz="0 0.8135 0"/>
+  </joint>
+ 
+  <joint name="front_right_steering_joint" type="revolute">
+   <limit effort="100" lower="-0.7" upper="0.7" velocity="10"/>  
+    <axis xyz="0 0 1"/>  
+    <parent link="front_link"/>
+     <child link="front_right_block"/>
+    <origin rpy="0 0 0" xyz="0 -0.8135 0"/>
+  </joint>
+
+
+   <joint name="front_left_wheel_joint" type="continuous">
+     <axis xyz="0 1 0"/>
+     <parent link="front_left_block"/>
+     <child link="front_left"/>
+     <origin rpy="0 0 0" xyz="0 0 0"/>
+   </joint>
+ 
+   <joint name="front_right_wheel_joint" type="continuous">
+     <axis xyz="0 1 0"/>
+     <parent link="front_right_block"/>
+     <child link="front_right"/>
+     <origin rpy="0 0 0" xyz="0 0 0"/>
+   </joint>
+ 
+   <joint name="rear_left_wheel_joint" type="continuous">
+     <axis xyz="0 1 0"/>
+     <parent link="rear_link"/>
+     <child link="rear_left"/>
+     <origin rpy="0 0 0" xyz="0 .8115 0"/>
+   </joint>
+
+   <joint name="rear_right_wheel_joint" type="continuous">
+     <axis xyz="0 1 0"/>
+     <parent link="rear_link"/>
+     <child link="rear_right"/>
+     <origin rpy="0 0 0" xyz="0 -0.8115 0"/>
+   </joint>
+
+  <joint name="attachment_joint" type="fixed"> 
+    <parent link="base_link"/>
+    <child link="attachment_block"/>
+    <origin rpy="0 0 0" xyz="-3.5 0 1.1"/>
+  </joint>
+
+  <joint name="rear_chassis_joint" type="revolute">
+    <limit effort="100" lower="-1.57" upper="1.57" velocity="10"/>  
+    <axis xyz="0 0 1"/>     
+    <parent link="attachment_block"/>
+    <child link="2nd_chassis"/>
+    <origin xyz="0 0 0"/>
+  </joint>
+
+  <joint name="rear_left_wheel_joint_2" type="continuous">
+     <axis xyz="0 1 0"/>
+     <parent link="2nd_chassis"/>
+     <child link="2nd_rear_left"/>
+     <origin rpy="0 0 0" xyz="-3.4035 .8115 -0.72"/>
+  </joint>
+
+   <joint name="rear_right_wheel_joint_2" type="continuous">
+     <axis xyz="0 1 0"/>
+     <parent link="2nd_chassis"/>
+     <child link="2nd_rear_right"/>
+     <origin rpy="0 0 0" xyz="-3.4035 -0.8115 -0.72"/>
+   </joint>
+
+ <transmission name="left_steering">
+   <type>transmission_interface/SimpleTransmission</type>
+   <joint name="front_left_steering_joint">
+     <hardwareInterface>EffortJointInterface</hardwareInterface>
+   </joint>
+   <actuator name="left_steering">
+     <mechanicalReduction>1</mechanicalReduction>
+     <hardwareInterface>EffortJointInterface</hardwareInterface>
+   </actuator>
+ </transmission>
+
+ <transmission name="right_steering">
+   <type>transmission_interface/SimpleTransmission</type>
+   <joint name="front_right_steering_joint">
+     <hardwareInterface>EffortJointInterface</hardwareInterface>
+   </joint>
+   <actuator name="right_steering">
+     <mechanicalReduction>1</mechanicalReduction>
+     <hardwareInterface>EffortJointInterface</hardwareInterface>
+   </actuator>
+ </transmission>
+
+<transmission name="front_left_wheel">
+   <type>transmission_interface/SimpleTransmission</type>
+   <joint name="front_left_wheel_joint">
+     <hardwareInterface>EffortJointInterface</hardwareInterface>
+   </joint>
+   <actuator name="front_left_wheel">
+     <mechanicalReduction>1</mechanicalReduction>
+     <hardwareInterface>EffortJointInterface</hardwareInterface>
+   </actuator>
+ </transmission>
+
+<transmission name="front_right_wheel">
+   <type>transmission_interface/SimpleTransmission</type>
+   <joint name="front_right_wheel_joint">
+     <hardwareInterface>EffortJointInterface</hardwareInterface>
+   </joint>
+   <actuator name="front_right_wheel">
+     <mechanicalReduction>1</mechanicalReduction>
+     <hardwareInterface>EffortJointInterface</hardwareInterface>
+   </actuator>
+ </transmission>
+
+<transmission name="rear_left_wheel">
+   <type>transmission_interface/SimpleTransmission</type>
+   <joint name="rear_left_wheel_joint">
+     <hardwareInterface>EffortJointInterface</hardwareInterface>
+   </joint>
+   <actuator name="rear_left_wheel">
+     <mechanicalReduction>1</mechanicalReduction>
+     <hardwareInterface>EffortJointInterface</hardwareInterface>
+   </actuator>
+ </transmission>
+
+<transmission name="rear_right_wheel">
+   <type>transmission_interface/SimpleTransmission</type>
+   <joint name="rear_right_wheel_joint">
+     <hardwareInterface>EffortJointInterface</hardwareInterface>
+   </joint>
+   <actuator name="rear_right_wheel">
+     <mechanicalReduction>1</mechanicalReduction>
+     <hardwareInterface>EffortJointInterface</hardwareInterface>
+   </actuator>
+ </transmission>
+
+
+  <!-- ros_control plugin 
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/truck</robotNamespace>
+      <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+    </plugin>
+  </gazebo>
+-->
+
+<gazebo>
+<plugin name="simple_vehicle" filename="libgazebo_simple_ackermann_control.so">
+            
+          <front_left_steering_joint>front_left_steering_joint</front_left_steering_joint>
+          <front_right_steering_joint>front_right_steering_joint</front_right_steering_joint>
+        <!-- Joints for each wheel -->
+          <front_left_wheel_joint>front_left_wheel_joint</front_left_wheel_joint>
+          <front_right_wheel_joint>front_right_wheel_joint</front_right_wheel_joint>
+          <rear_left_wheel_joint>rear_left_wheel_joint</rear_left_wheel_joint>
+          <rear_right_wheel_joint>rear_right_wheel_joint</rear_right_wheel_joint>
+          <!-- Joint which controls the gas -->
+          <gas>gas_joint</gas>
+          <!-- Joint which controls the gas -->
+          <brake>brake_joint</brake>
+          <!-- Joint which controls the steering -->
+          <steering>steering_joint</steering>
+          <!-- Power is multiplied by "gas" to determine force applied to wheels -->
+          <front_power>100</front_power>
+          <rear_power>100</rear_power>
+          <!-- The angle range the front tires can turn for steering, in radians -->
+          <tire_angle_range>0.7</tire_angle_range>
+          <!-- Maximum speed for the car in meters/second -->
+          <max_speed>10</max_speed>
+          <!-- Factor for the down-force applied as the car travels faster -->
+          <!-- A larger number increases the down force -->
+          <aero_load>0.1</aero_load>
+     </plugin>
+
+    <!--Plugin for odometry-->
+ <plugin name='gazebo_ros_groundtruth_sim' filename='libgazebo_ros_p3d.so'>
+      <updateRate>100.0</updateRate>
+      <topicName>ground_truth/odom</topicName>
+      <gaussianNoise>0.001</gaussianNoise>
+      <frameName>world</frameName>
+      <alwaysOn>true</alwaysOn>
+      <bodyName>base_link</bodyName>
+      <xyzOffset>0 0 0</xyzOffset>
+      <rpyOffset>0 0 0</rpyOffset>
+ </plugin>
+
+</gazebo>
+
+  <!-- hokuyo -->
+  <gazebo reference="hokuyo_link">
+    <sensor type="ray" name="head_hokuyo_sensor">
+      <pose>0 0 0 0 0 0</pose>
+      <visualize>0</visualize>
+      <update_rate>40</update_rate>
+      <ray>
+        <scan>
+          <horizontal>
+            <samples>720</samples>
+            <resolution>1</resolution>
+            <min_angle>-1.570796</min_angle>
+            <max_angle>1.570796</max_angle>
+          </horizontal>
+        </scan>
+        <range>
+          <min>0.10</min>
+          <max>60.0</max>
+          <resolution>0.01</resolution>
+        </range>
+        <noise>
+          <type>gaussian</type>
+          <!-- Noise parameters based on published spec for Hokuyo laser
+               achieving "+-30mm" accuracy at range < 10m.  A mean of 0.0m and
+               stddev of 0.01m will put 99.7% of samples within 0.03m of the true
+               reading. -->
+          <mean>0.0</mean>
+          <stddev>0.01</stddev>
+        </noise>
+      </ray>
+      <plugin name="gazebo_ros_hokuyo_controller" filename="libgazebo_ros_laser.so">
+        <topicName>truck_laser_scan</topicName>
+        <frameName>hokuyo_link</frameName>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+</robot>
+
+
+

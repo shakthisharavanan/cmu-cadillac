@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset>
+    <contributor>
+      <author>Blender User</author>
+      <authoring_tool>Blender 2.70.0 commit date:2014-04-10, commit time:11:49, hash:f93bc76</authoring_tool>
+    </contributor>
+    <created>2014-07-03T21:08:20</created>
+    <modified>2014-07-03T21:08:20</modified>
+    <unit name="meter" meter="1"/>
+    <up_axis>Z_UP</up_axis>
+  </asset>
+  <library_images>
+    <image id="Ranger_Diffuse_tga" name="Ranger_Diffuse_tga">
+      <init_from>../materials/textures/Ranger_Diffuse.tga</init_from>
+    </image>
+  </library_images>
+  <library_effects>
+    <effect id="Ranger-effect">
+      <profile_COMMON>
+        <newparam sid="Ranger_Diffuse_tga-surface">
+          <surface type="2D">
+            <init_from>Ranger_Diffuse_tga</init_from>
+          </surface>
+        </newparam>
+        <newparam sid="Ranger_Diffuse_tga-sampler">
+          <sampler2D>
+            <source>Ranger_Diffuse_tga-surface</source>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <phong>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <ambient>
+              <color sid="ambient">0 0 0 1</color>
+            </ambient>
+            <diffuse>
+              <texture texture="Ranger_Diffuse_tga-sampler" texcoord="geom-Pedal_Gas-map1"/>
+            </diffuse>
+            <specular>
+              <color sid="specular">0.45 0.45 0.45 1</color>
+            </specular>
+            <shininess>
+              <float sid="shininess">9</float>
+            </shininess>
+            <index_of_refraction>
+              <float sid="index_of_refraction">1</float>
+            </index_of_refraction>
+          </phong>
+        </technique>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_materials>
+    <material id="Ranger-material" name="Ranger">
+      <instance_effect url="#Ranger-effect"/>
+    </material>
+  </library_materials>
+  <library_geometries>
+    <geometry id="Pedal_Gas-mesh" name="Pedal_Gas">
+      <mesh>
+        <source id="Pedal_Gas-mesh-positions">
+          <float_array id="Pedal_Gas-mesh-positions-array" count="66">0.2395768 -0.09064102 3.626472 -0.2395792 -0.09064102 3.626472 0.2395768 2.417458 6.136289 -0.2395792 2.417458 6.136289 0.2395787 -2.096802 -4.706857 -0.2395782 -2.096802 -4.706857 0.2395787 2.585297 2.495505 -0.2395772 2.585297 2.495505 -0.2395772 1.189426 -1.803647 0.2395787 1.189426 -1.803647 -0.2395782 -0.3014221 -0.9272088 0.2395777 -0.3014221 -0.9272088 -1.504817 -2.578392 -4.478489 1.504818 -2.578102 -4.477859 1.504818 -0.7827225 -0.6982119 -1.504818 -0.7830238 -0.6988409 1.504818 -2.096653 -4.706552 1.504818 -0.301281 -0.9269028 -1.504818 -0.3015823 -0.9275318 -1.504817 -2.096951 -4.707181 0.2395787 -2.096802 -4.706857 -0.2395782 -2.096802 -4.706857</float_array>
+          <technique_common>
+            <accessor source="#Pedal_Gas-mesh-positions-array" count="22" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Pedal_Gas-mesh-normals">
+          <float_array id="Pedal_Gas-mesh-normals-array" count="78">0 -0.7073488 0.7068646 0 -0.7073488 0.7068646 0 -0.9989304 0.04623854 0 -0.9989304 0.04623854 -1 5.01125e-7 -5.00782e-7 -1 6.26769e-7 -2.03502e-7 -1 5.02882e-7 -2.32707e-7 1 -5.02882e-7 2.32707e-7 1 -6.26769e-7 2.03502e-7 1 -5.01125e-7 5.00782e-7 -2.72148e-6 -0.9032732 0.429066 7.81773e-7 -0.9032741 0.4290637 -1 5.00048e-7 -2.37529e-7 1 -3.84095e-7 4.34768e-7 0 -0.4296377 -0.9030014 2.3024e-4 -0.4289572 -0.9033248 1 0 0 1 0 0 0 0.4284553 0.903563 -2.31728e-4 0.4291404 0.9032378 -1 0 -2.05867e-7 -1 0 -2.05867e-7 -2.66329e-4 0.4290662 0.9032731 2.68321e-4 -0.4290626 -0.9032748 2.8194e-4 -0.429068 -0.9032722 -2.84968e-4 0.4290664 0.9032729</float_array>
+          <technique_common>
+            <accessor source="#Pedal_Gas-mesh-normals-array" count="26" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Pedal_Gas-mesh-map-0">
+          <float_array id="Pedal_Gas-mesh-map-0-array" count="156">0.9173459 0.6067841 0.9173459 0.5790786 0.9212455 0.5790786 0.9212455 0.5790786 0.9212455 0.6067841 0.9173459 0.6067841 0.9212455 0.6067841 0.9212455 0.6423798 0.9173459 0.6423798 0.9173459 0.6423798 0.9173459 0.6067841 0.9212455 0.6067841 0.8216971 0.8775222 0.8078636 0.8853554 0.8233851 0.8904282 0.8216971 0.8775222 0.8233851 0.8904282 0.843617 0.8895354 0.8216971 0.8775222 0.843617 0.8895354 0.841613 0.8820508 0.8217268 0.8774881 0.8416465 0.8819988 0.8436567 0.8894817 0.8217268 0.8774881 0.8436567 0.8894817 0.8234255 0.8903929 0.8079 0.8853338 0.8217268 0.8774881 0.8234255 0.8903929 0.8514757 0.8559398 0.8514782 0.84233 0.8702804 0.84233 0.8702804 0.84233 0.8702779 0.8559398 0.8514757 0.8559398 0.843617 0.8895354 0.8600786 0.8788117 0.841613 0.8820508 0.8416465 0.8819988 0.8601094 0.878744 0.8436567 0.8894817 0.8487993 0.850219 0.8487999 0.8480514 0.8514782 0.84233 0.8514782 0.84233 0.8514757 0.8559398 0.8487993 0.850219 0.8514788 0.8403187 0.8702804 0.8403187 0.8702804 0.84233 0.8702804 0.84233 0.8514782 0.84233 0.8514788 0.8403187 0.8729565 0.8480514 0.8729557 0.850219 0.8702779 0.8559398 0.8702779 0.8559398 0.8702804 0.84233 0.8729565 0.8480514 0.8702771 0.8580759 0.8514757 0.8580759 0.8514757 0.8559398 0.8514757 0.8559398 0.8702779 0.8559398 0.8702771 0.8580759 0.8729565 0.8480514 0.8702804 0.84233 0.8729574 0.84233 0.8514782 0.84233 0.8487999 0.8480514 0.8488015 0.84233 0.8487993 0.850219 0.8514757 0.8559398 0.8487986 0.8559398 0.8702779 0.8559398 0.8729557 0.850219 0.8729544 0.8559398</float_array>
+          <technique_common>
+            <accessor source="#Pedal_Gas-mesh-map-0-array" count="78" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="Pedal_Gas-mesh-vertices">
+          <input semantic="POSITION" source="#Pedal_Gas-mesh-positions"/>
+        </vertices>
+        <polylist material="Ranger-material" count="26">
+          <input semantic="VERTEX" source="#Pedal_Gas-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#Pedal_Gas-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#Pedal_Gas-mesh-map-0" offset="2" set="0"/>
+          <vcount>3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 </vcount>
+          <p>0 0 0 2 0 1 3 0 2 3 1 3 1 1 4 0 1 5 1 2 6 10 2 7 11 2 8 11 3 9 0 3 10 1 3 11 1 4 12 3 4 13 7 4 14 1 5 15 7 5 16 8 5 17 1 6 18 8 6 19 10 6 20 0 7 21 11 7 22 9 7 23 0 8 24 9 8 25 6 8 26 2 9 27 0 9 28 6 9 29 12 10 30 13 10 31 14 10 32 14 11 33 15 11 34 12 11 35 8 12 36 5 12 37 10 12 38 11 13 39 4 13 40 9 13 41 21 14 42 20 14 43 13 14 44 13 15 45 12 15 46 21 15 47 16 16 48 17 16 49 14 16 50 14 17 51 13 17 52 16 17 53 11 18 54 10 18 55 15 18 56 15 19 57 14 19 58 11 19 59 18 20 60 19 20 61 12 20 62 12 21 63 15 21 64 18 21 65 11 22 66 14 22 67 17 22 68 13 23 69 20 23 70 16 23 71 21 24 72 12 24 73 19 24 74 15 25 75 10 25 76 18 25 77</p>
+        </polylist>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_controllers/>
+  <library_visual_scenes>
+    <visual_scene id="Scene" name="Scene">
+      <node id="Pedal_Gas" name="Pedal_Gas" type="NODE">
+        <matrix sid="transform">0.02550348 0 0 0 0 0.02550348 0 0 0 0 0.02550348 0 0 0 0 1</matrix>
+        <node id="Untitled_001" name="Untitled_001" type="NODE">
+          <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+          <instance_geometry url="#Pedal_Gas-mesh">
+            <bind_material>
+              <technique_common>
+                <instance_material symbol="Ranger-material" target="#Ranger-material">
+                  <bind_vertex_input semantic="geom-Pedal_Gas-map1" input_semantic="TEXCOORD" input_set="0"/>
+                </instance_material>
+              </technique_common>
+            </bind_material>
+          </instance_geometry>
+        </node>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#Scene"/>
+  </scene>
+</COLLADA>

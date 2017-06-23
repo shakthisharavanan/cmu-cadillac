@@ -1,0 +1,20 @@
+<launch>
+
+  <arg name="model" default="$(find cmu_cadillac_description)/urdf/cmu_cadillac.urdf"/>
+  <arg name="gui" default="true" />
+  <arg name="rvizconfig" default="$(find cmu_cadillac_description)/config/cmu_cadillac.rviz" />
+
+  <param name="robot_description" command="$(find xacro)/xacro.py $(arg model)" />
+  <param name="use_gui" value="$(arg gui)"/>
+
+  <!-- to generate the TF tree from urdf-->
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+
+  <!--launch urdf in rviz-->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
+
+  <!--TF frame from odom to base_link-->
+  <!--<node name="odom_to_base" pkg="cmu_cadillac_gazebo" type="odom_to_base.py" output="screen" /> -->
+
+</launch>

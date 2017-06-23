@@ -1,0 +1,32 @@
+<launch>
+	<!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
+	<include file="$(find gazebo_ros)/launch/empty_world.launch">
+	<arg name="world_name" value="$(find cmu_cadillac_gazebo)/worlds/head-in.world"/>
+	<!-- more default parameters can be changed here -->
+	</include>
+
+	<!-- put robot on parameter server -->
+	<arg name="model" default="$(find cmu_cadillac_description)/urdf/cmu_cadillac.urdf"/>
+	<arg name="gui" default="false" />
+
+	<param name="robot_description" command="$(find xacro)/xacro.py $(arg model)" />
+	<param name="use_gui" value="$(arg gui)"/>
+
+  <!-- to generate the TF tree from urdf-->
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+
+	<!-- Spawn a robot into Gazebo -->
+	<node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-file $(find cmu_cadillac_description)/urdf/cmu_cadillac.urdf -urdf -x -24.24 -y 35 -z 0 -Y 1.5708 -model cmu_cadillac" /> 
+
+	<node pkg="robot_pose_ekf" type="robot_pose_ekf" name="robot_pose_ekf" output="screen">
+     <param name="output_frame" value="world"/>
+     <param name="freq" value="30.0"/>
+     <param name="debug" value="true"/>
+     <param name="sensor_timeout" value="1.0"/>
+     <param name="odom_used" value="true"/>
+     <param name="imu_used" value="true"/>
+     <param name="vo_used" value="false"/>
+    </node> 
+
+</launch>
