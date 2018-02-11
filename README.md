@@ -11,7 +11,7 @@ Note:- cmu_cadillac_navigation is not fully developed
 clone & compile cmu_cadillac
 
 ```sh
-cd /PATH/TO/CATKIN_WS/src
+cd /PATH_TO_CATKIN_WS/src
 git clone https://github.com/shakthisharavanan/cmu-cadillac.git
 cd ..
 catkin_make
@@ -21,7 +21,7 @@ catkin_make
 To simulate parallel parking procedure:
 ```sh
 roslaunch cmu_cadillac_gazebo parking.launch
-cd cmu_cadillac/cmu_cadillac_gazebo/nodes
+cd src/cmu_cadillac/cmu_cadillac_gazebo/nodes
 python parking_controller_modified.py
 ```
 
@@ -33,7 +33,7 @@ roslaunch cmu_cadillac_description cmu_cadillac_rviz.launch
 To simulate parallel parking in a one way street with vehicles on either side
 ```sh
 roslaunch cmu_cadillac_gazebo parking.launch
-cd cmu_cadillac/cmu_cadillac_gazebo/nodes
+cd src/cmu_cadillac/cmu_cadillac_gazebo/nodes
 python one-way_parking.py
 ```
 
@@ -42,7 +42,7 @@ python one-way_parking.py
 To simulate parallel parking in curved roads
 ```sh
 roslaunch cmu_cadillac_gazebo parking.launch
-cd cmu_cadillac/cmu_cadillac_gazebo/nodes
+cd src/cmu_cadillac/cmu_cadillac_gazebo/nodes
 python parking_curved.py
 ```
 
